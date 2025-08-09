@@ -19,5 +19,18 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // Seed geographical data in proper order (respecting foreign key constraints)
+        $this->call([
+            ProvinceSeeder::class,
+            DistrictSeeder::class,
+            CitySeeder::class,
+            PostalCodeSeeder::class,
+            GramaNiladhariDivisionSeeder::class,
+            PradeshiyaSabaSeeder::class,
+            PoliceStationSeeder::class,
+            HospitalSeeder::class,
+            PharmacySeeder::class,
+        ]);
     }
 }
