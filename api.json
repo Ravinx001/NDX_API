@@ -1,0 +1,1280 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "NDX API Documentation",
+        "version": "v1",
+        "description": "NDX API - Sri Lankan Geographic and Institutional Data API. Provides comprehensive data about provinces, districts, cities, hospitals, pharmacies, police stations, and other administrative divisions in Sri Lanka."
+    },
+    "servers": [
+        {
+            "url": "http://localhost/api"
+        }
+    ],
+    "paths": {
+        "/v1/cities": {
+            "get": {
+                "operationId": "cities.index",
+                "description": "Retrieve all cities in Sri Lanka with their district and province information.",
+                "summary": "Get all cities",
+                "tags": [
+                    "Cities",
+                    "City"
+                ],
+                "parameters": [
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Pagination",
+                        "schema": {
+                            "type": "string",
+                            "default": 50
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "integer",
+                                    "enum": [
+                                        200
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/cities/{city}": {
+            "get": {
+                "operationId": "cities.show",
+                "summary": "Get a specific city",
+                "tags": [
+                    "Cities",
+                    "City"
+                ],
+                "parameters": [
+                    {
+                        "name": "city",
+                        "in": "path",
+                        "required": true,
+                        "description": "The city ID",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/City"
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/ModelNotFoundException"
+                    }
+                }
+            }
+        },
+        "/v1/districts": {
+            "get": {
+                "operationId": "districts.index",
+                "description": "Retrieve all districts in Sri Lanka with their province information.",
+                "summary": "Get all districts",
+                "tags": [
+                    "Districts",
+                    "District"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "integer",
+                                    "enum": [
+                                        200
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/districts/{district}": {
+            "get": {
+                "operationId": "districts.show",
+                "summary": "Get a specific district",
+                "tags": [
+                    "Districts",
+                    "District"
+                ],
+                "parameters": [
+                    {
+                        "name": "district",
+                        "in": "path",
+                        "required": true,
+                        "description": "The district ID",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/District"
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/ModelNotFoundException"
+                    }
+                }
+            }
+        },
+        "/v1/grama-niladhari": {
+            "get": {
+                "operationId": "grama-niladhari.index",
+                "description": "Retrieve all Grama Niladhari divisions in Sri Lanka.",
+                "summary": "Get all Grama Niladhari divisions",
+                "tags": [
+                    "Grama Niladhari Divisions",
+                    "GramaNiladhari"
+                ],
+                "parameters": [
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "default": 50
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "integer",
+                                    "enum": [
+                                        200
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/grama-niladhari/{gramaNiladhari}": {
+            "get": {
+                "operationId": "grama-niladhari.show",
+                "summary": "Get a specific Grama Niladhari division",
+                "tags": [
+                    "Grama Niladhari Divisions",
+                    "GramaNiladhari"
+                ],
+                "parameters": [
+                    {
+                        "name": "gramaNiladhari",
+                        "in": "path",
+                        "required": true,
+                        "description": "The grama niladhari ID",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/GramaNiladhariDivision"
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/ModelNotFoundException"
+                    }
+                }
+            }
+        },
+        "/v1/hospitals": {
+            "get": {
+                "operationId": "hospitals.index",
+                "description": "Retrieve all hospitals in Sri Lanka, optionally filtered and grouped by type.",
+                "summary": "Get all hospitals",
+                "tags": [
+                    "Hospitals",
+                    "Hospital"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "integer",
+                                    "enum": [
+                                        200
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/hospitals/{hospital}": {
+            "get": {
+                "operationId": "hospitals.show",
+                "summary": "Get a specific hospital",
+                "tags": [
+                    "Hospitals",
+                    "Hospital"
+                ],
+                "parameters": [
+                    {
+                        "name": "hospital",
+                        "in": "path",
+                        "required": true,
+                        "description": "The hospital ID",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Hospital"
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/ModelNotFoundException"
+                    }
+                }
+            }
+        },
+        "/v1/pharmacies": {
+            "get": {
+                "operationId": "pharmacies.index",
+                "description": "Retrieve all pharmacies in Sri Lanka, optionally filtered and grouped by type.",
+                "summary": "Get all pharmacies",
+                "tags": [
+                    "Pharmacies",
+                    "Pharmacy"
+                ],
+                "parameters": [
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "default": 50
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "integer",
+                                    "enum": [
+                                        200
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/pharmacies/{pharmacy}": {
+            "get": {
+                "operationId": "pharmacies.show",
+                "summary": "Get a specific pharmacy",
+                "tags": [
+                    "Pharmacies",
+                    "Pharmacy"
+                ],
+                "parameters": [
+                    {
+                        "name": "pharmacy",
+                        "in": "path",
+                        "required": true,
+                        "description": "The pharmacy ID",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Pharmacy"
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/ModelNotFoundException"
+                    }
+                }
+            }
+        },
+        "/v1/police-stations": {
+            "get": {
+                "operationId": "police-stations.index",
+                "description": "Retrieve all police stations in Sri Lanka with their location information.",
+                "summary": "Get all police stations",
+                "tags": [
+                    "Police Stations",
+                    "PoliceStation"
+                ],
+                "parameters": [
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "default": 50
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "integer",
+                                    "enum": [
+                                        200
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/police-stations/{policeStation}": {
+            "get": {
+                "operationId": "police-stations.show",
+                "summary": "Get a specific police station",
+                "tags": [
+                    "Police Stations",
+                    "PoliceStation"
+                ],
+                "parameters": [
+                    {
+                        "name": "policeStation",
+                        "in": "path",
+                        "required": true,
+                        "description": "The police station ID",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/PoliceStation"
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/ModelNotFoundException"
+                    }
+                }
+            }
+        },
+        "/v1/postal-codes": {
+            "get": {
+                "operationId": "postal-codes.index",
+                "description": "Retrieve all postal codes in Sri Lanka with their location information.",
+                "summary": "Get all postal codes",
+                "tags": [
+                    "Postal Codes",
+                    "PostalCode"
+                ],
+                "parameters": [
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "default": 50
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "integer",
+                                    "enum": [
+                                        200
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/postal-codes/{postalCode}": {
+            "get": {
+                "operationId": "postal-codes.show",
+                "summary": "Get a specific postal code",
+                "tags": [
+                    "Postal Codes",
+                    "PostalCode"
+                ],
+                "parameters": [
+                    {
+                        "name": "postalCode",
+                        "in": "path",
+                        "required": true,
+                        "description": "The postal code ID",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/PostalCode"
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/ModelNotFoundException"
+                    }
+                }
+            }
+        },
+        "/v1/pradeshiya-sabas": {
+            "get": {
+                "operationId": "pradeshiya-sabas.index",
+                "description": "Retrieve all Pradeshiya Sabas (Local Government Councils) in Sri Lanka.",
+                "summary": "Get all Pradeshiya Sabas",
+                "tags": [
+                    "Pradeshiya Sabas",
+                    "PradeshiyaSaba"
+                ],
+                "parameters": [
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "default": 50
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "integer",
+                                    "enum": [
+                                        200
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/pradeshiya-sabas/{pradeshiyaSaba}": {
+            "get": {
+                "operationId": "pradeshiya-sabas.show",
+                "summary": "Get a specific Pradeshiya Sabha",
+                "tags": [
+                    "Pradeshiya Sabas",
+                    "PradeshiyaSaba"
+                ],
+                "parameters": [
+                    {
+                        "name": "pradeshiyaSaba",
+                        "in": "path",
+                        "required": true,
+                        "description": "The pradeshiya saba ID",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/PradeshiyaSaba"
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/ModelNotFoundException"
+                    }
+                }
+            }
+        },
+        "/v1/provinces": {
+            "get": {
+                "operationId": "provinces.index",
+                "description": "Retrieve all provinces in Sri Lanka with their districts and cities count.",
+                "summary": "Get all provinces",
+                "tags": [
+                    "Provinces",
+                    "Province"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "integer",
+                                    "enum": [
+                                        200
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/provinces/{province}": {
+            "get": {
+                "operationId": "provinces.show",
+                "summary": "Get a specific province",
+                "tags": [
+                    "Provinces",
+                    "Province"
+                ],
+                "parameters": [
+                    {
+                        "name": "province",
+                        "in": "path",
+                        "required": true,
+                        "description": "The province ID",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Province"
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/ModelNotFoundException"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "City": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name_en": {
+                        "type": "string"
+                    },
+                    "name_si": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "name_ta": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "latitude": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "longitude": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "district_id": {
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name_en",
+                    "name_si",
+                    "name_ta",
+                    "latitude",
+                    "longitude",
+                    "district_id",
+                    "created_at",
+                    "updated_at"
+                ],
+                "title": "City"
+            },
+            "District": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name_en": {
+                        "type": "string"
+                    },
+                    "name_si": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "name_ta": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "code": {
+                        "type": "string"
+                    },
+                    "province_id": {
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name_en",
+                    "name_si",
+                    "name_ta",
+                    "code",
+                    "province_id",
+                    "created_at",
+                    "updated_at"
+                ],
+                "title": "District"
+            },
+            "GramaNiladhariDivision": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name_en": {
+                        "type": "string"
+                    },
+                    "name_si": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "name_ta": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "code": {
+                        "type": "string"
+                    },
+                    "district_id": {
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name_en",
+                    "name_si",
+                    "name_ta",
+                    "code",
+                    "district_id",
+                    "created_at",
+                    "updated_at"
+                ],
+                "title": "GramaNiladhariDivision"
+            },
+            "Hospital": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "phone": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "services": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {}
+                    },
+                    "bed_count": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ]
+                    },
+                    "latitude": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "longitude": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "city_id": {
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name",
+                    "type",
+                    "address",
+                    "phone",
+                    "services",
+                    "bed_count",
+                    "latitude",
+                    "longitude",
+                    "city_id",
+                    "created_at",
+                    "updated_at"
+                ],
+                "title": "Hospital"
+            },
+            "Pharmacy": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "phone": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "opening_time": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "closing_time": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "is_24_hours": {
+                        "type": "integer"
+                    },
+                    "latitude": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "longitude": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "city_id": {
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name",
+                    "type",
+                    "address",
+                    "phone",
+                    "opening_time",
+                    "closing_time",
+                    "is_24_hours",
+                    "latitude",
+                    "longitude",
+                    "city_id",
+                    "created_at",
+                    "updated_at"
+                ],
+                "title": "Pharmacy"
+            },
+            "PoliceStation": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "phone": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "latitude": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "longitude": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "city_id": {
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name",
+                    "address",
+                    "phone",
+                    "latitude",
+                    "longitude",
+                    "city_id",
+                    "created_at",
+                    "updated_at"
+                ],
+                "title": "PoliceStation"
+            },
+            "PostalCode": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "code": {
+                        "type": "string"
+                    },
+                    "area_name": {
+                        "type": "string"
+                    },
+                    "city_id": {
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    }
+                },
+                "required": [
+                    "id",
+                    "code",
+                    "area_name",
+                    "city_id",
+                    "created_at",
+                    "updated_at"
+                ],
+                "title": "PostalCode"
+            },
+            "PradeshiyaSaba": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name_en": {
+                        "type": "string"
+                    },
+                    "name_si": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "name_ta": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "code": {
+                        "type": "string"
+                    },
+                    "district_id": {
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name_en",
+                    "name_si",
+                    "name_ta",
+                    "code",
+                    "district_id",
+                    "created_at",
+                    "updated_at"
+                ],
+                "title": "PradeshiyaSaba"
+            },
+            "Province": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name_en": {
+                        "type": "string"
+                    },
+                    "name_si": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "name_ta": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "code": {
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name_en",
+                    "name_si",
+                    "name_ta",
+                    "code",
+                    "created_at",
+                    "updated_at"
+                ],
+                "title": "Province"
+            }
+        },
+        "responses": {
+            "ModelNotFoundException": {
+                "description": "Not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "description": "Error overview."
+                                }
+                            },
+                            "required": [
+                                "message"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
