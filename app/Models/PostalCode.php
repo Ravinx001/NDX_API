@@ -6,5 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class PostalCode extends Model
 {
-    //
+
+    protected $guarded = [];
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
 }
